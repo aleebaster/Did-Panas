@@ -38,7 +38,8 @@ npm start                    # http://localhost:3000
 | `R2_BUCKET_NAME` | назва бакета зображеннями |
 | `R2_PUBLIC_BASE_URL` | публічний base URL для читання (без сліда в кінці) |
 
-Локальні креди для розробки: логін `admin`, пароль `DidPanas2026!` (у `.env.local`).
+Локальні креди для розробки — у `.env.local` (файл ігнорується Git і не
+комітиться); на Vercel — у Environment Variables проєкту.
 
 ### Доставка та Нова пошта
 
@@ -220,7 +221,10 @@ URL. Пріоритет бекендів: **Cloudinary → R2 → local**. Дл�
    самим Next.js.
 2. **Environment Variables** (Vercel → Project → Settings → Environment
    Variables) — заповніть окремо від GitHub (не через .env.local у репо):
-   - `ADMIN_LOGIN`, `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET` — доступ до `/admin`;
+   - `ADMIN_LOGIN`, `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET` — доступ до `/admin`.
+     **Без цих змінних вхід до адмін-панелі неможливий:** форма входу
+     показуватиме помилку «Авторизацію на сервері не налаштовано», а без
+     `ADMIN_SESSION_SECRET` сесійні cookie у production не створюються;
    - `NEXT_PUBLIC_SITE_URL` — https://<ваш-домен>;
    - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` —
      постійне зберігання фото (рекомендовано);

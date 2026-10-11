@@ -2,13 +2,24 @@ import crypto from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
 
 const SESSION_COOKIE = "dp_admin_session";
+const DEV_SESSION_SECRET = "did-panas-dev-session-secret";
 
-function secret(): string {
-  return process.env.ADMIN_SESSION_SECRET ?? "did-panas-dev-session-secret";
+function secret(): string | null {
+  const value = process.env.ADMIN_SESSION_SECRET?.trim();
+  if (value) {
+    return value;
+  }
+  // У production без заданого секрета сесії вважаються недійсними:
+  // fallback із репозиторію був би публічним і дозволяв би підробку cookie.
+  return process.env.NODE_ENV === "production" ? null : DEV_SESSION_SECRET;
 }
 
-function sign(value: string): string {
-  return crypto.createHmac("sha256", secret()).update(value).digest("hex");
+function sign(value: string): string | null {
+  const key = secret();
+  if (!key) {
+    return null;
+  }
+  return crypto.createHmac("sha256", key).update(value).digest("hex");
 }
 
 function isValidSession(token: string | undefined): boolean {
@@ -22,6 +33,9 @@ function isValidSession(token: string | undefined): boolean {
   }
 
   const expected = sign(expiry);
+  if (!expected) {
+    return false;
+  }
   if (expected.length !== signature.length) {
     return false;
   }

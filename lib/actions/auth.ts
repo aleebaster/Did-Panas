@@ -20,8 +20,14 @@ export async function loginAction(
     return { error: "Введіть логін та пароль." };
   }
 
-  const ok = await signIn(login, password);
-  if (!ok) {
+  const result = await signIn(login, password);
+  if (result === "unconfigured") {
+    return {
+      error:
+        "Авторизацію на сервері не налаштовано: перевірте змінні середовища ADMIN_LOGIN, ADMIN_PASSWORD і ADMIN_SESSION_SECRET.",
+    };
+  }
+  if (result !== "ok") {
     return { error: "Невірний логін або пароль." };
   }
 

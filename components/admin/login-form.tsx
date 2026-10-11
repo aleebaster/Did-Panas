@@ -76,8 +76,10 @@ export function LoginForm({ defaultLogin }: { defaultLogin: string }) {
       <div className="border-t border-border pt-4 text-xs text-muted-foreground">
         {showHint ? (
           <p>
-            Логін і пароль задаються у файлі <code>.env.local</code> через змінні{" "}
-            <code>ADMIN_LOGIN</code> та <code>ADMIN_PASSWORD</code>.
+            Логін і пароль задаються змінними середовища{" "}
+            <code>ADMIN_LOGIN</code> та <code>ADMIN_PASSWORD</code>: локально у
+            файлі <code>.env.local</code>, на Vercel — у Settings → Environment
+            Variables.
           </p>
         ) : (
           <button

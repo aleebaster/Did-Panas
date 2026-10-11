@@ -17,7 +17,7 @@ import { getCatalog } from "@/lib/catalog";
 export const metadata: Metadata = {
   title: "Контакти",
   description:
-    "Контакти Did Panas: телефон, email, адреса майстерні у Львові, графік роботи та соціальні мережі.",
+    "Контакти Did Panas: телефон, email, адреса майстерні у Калуші, графік роботи та соціальні мережі.",
 };
 
 const faq = [

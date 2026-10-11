@@ -428,7 +428,7 @@ const settings: StoreSettings = {
   tagline: "Грибна майстерня з українським характером",
   contactEmail: "shop@did-panas.shop",
   contactPhone: "+380 95 110 52 02",
-  address: "м. Львів, вул. Лісова, 12, Україна",
+  address: "м. Калуш, вул. Литвина, 9а (Івано-Франківська обл.)",
   workingHours: "Пн–Пт 09:00–18:00, Сб 10:00–15:00",
   instagram: "https://instagram.com/didpanas",
   facebook: "https://facebook.com/didpanas",
